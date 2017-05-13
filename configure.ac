@@ -1,5 +1,6 @@
 dnl Process this file with autoconf to produce a configure script. -*-m4-*-
 
+AC_PREREQ([2.69])
 AC_INIT([speex],[1.2.0],[speex-dev@xiph.org])
 
 AC_CONFIG_SRCDIR([libspeex/speex.c])
