@@ -4,6 +4,7 @@ AC_INIT([speex],[1.2.0],[speex-dev@xiph.org])
 
 AC_CONFIG_SRCDIR([libspeex/speex.c])
 AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_AUX_DIR([build-aux])
 
 dnl enable silent rules on automake 1.11 and later
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
