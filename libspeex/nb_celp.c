@@ -114,7 +114,7 @@ void *nb_encoder_init(const SpeexMode *m)
    st = (EncState*)speex_alloc(sizeof(EncState));
    if (!st)
       return NULL;
-#if defined(VAR_ARRAYS) || defined (USE_ALLOCA)
+#if defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA)
    st->stack = NULL;
 #else
    st->stack = (char*)speex_alloc_scratch(NB_ENC_STACK);
@@ -181,7 +181,7 @@ void nb_encoder_destroy(void *state)
 {
    EncState *st=(EncState *)state;
    /* Free all allocated memory */
-#if !(defined(VAR_ARRAYS) || defined (USE_ALLOCA))
+#if !(defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA))
    speex_free_scratch(st->stack);
 #endif
 
@@ -1071,7 +1071,7 @@ void *nb_decoder_init(const SpeexMode *m)
    st = (DecState *)speex_alloc(sizeof(DecState));
    if (!st)
       return NULL;
-#if defined(VAR_ARRAYS) || defined (USE_ALLOCA)
+#if defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA)
    st->stack = NULL;
 #else
    st->stack = (char*)speex_alloc_scratch(NB_DEC_STACK);
@@ -1120,7 +1120,7 @@ void *nb_decoder_init(const SpeexMode *m)
 
 void nb_decoder_destroy(void *state)
 {
-#if !(defined(VAR_ARRAYS) || defined (USE_ALLOCA))
+#if !(defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA))
    DecState *st;
    st=(DecState*)state;
 

@@ -29,47 +29,19 @@ AM_INIT_AUTOMAKE([foreign no-define])
 AM_MAINTAINER_MODE([enable])
 
 AC_CANONICAL_HOST
-LT_PRERQ([2.4.6])
-LT_INIT(win32-dll])
+LT_PREREQ([2.4.6])
+LT_INIT([win32-dll])
 
 AC_C_BIGENDIAN
 AC_C_CONST
 AC_C_INLINE
 AC_C_RESTRICT
+AC_C_VARARRAYS
+
+AC_FUNC_ALLOCA
 
 
-AC_MSG_CHECKING(for C99 variable-size arrays)
-AC_TRY_COMPILE( , [
-int foo;
-foo = 10;
-int array[foo];
-],
-[has_var_arrays=yes;AC_DEFINE([VAR_ARRAYS], [], [Use C99 variable-size arrays])
-],
-has_var_arrays=no
-)
-AC_MSG_RESULT($has_var_arrays)
-
-AC_CHECK_HEADERS([alloca.h getopt.h])
-AC_MSG_CHECKING(for alloca)
-AC_TRY_COMPILE( [
-#ifdef HAVE_ALLOCA_H
-# include <alloca.h>
-#endif
-#include <stdlib.h>
-], [
-int foo=10;
-int *array = alloca(foo);
-],
-[
-has_alloca=yes;
-if test x$has_var_arrays = "xno" ; then
-AC_DEFINE([USE_ALLOCA], [], [Make use of alloca])
-fi
-],
-has_alloca=no
-)
-AC_MSG_RESULT($has_alloca)
+AC_CHECK_HEADERS([getopt.h])
 
 AC_MSG_CHECKING(for SSE in current arch/CFLAGS)
 AC_LINK_IFELSE([

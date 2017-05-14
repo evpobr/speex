@@ -159,7 +159,7 @@ void *sb_encoder_init(const SpeexMode *m)
 
 
    st->st_low = speex_encoder_init(mode->nb_mode);
-#if defined(VAR_ARRAYS) || defined (USE_ALLOCA)
+#if defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA)
    st->stack = NULL;
 #else
    /*st->stack = (char*)speex_alloc_scratch(SB_ENC_STACK);*/
@@ -233,7 +233,7 @@ void sb_encoder_destroy(void *state)
    SBEncState *st=(SBEncState*)state;
 
    speex_encoder_destroy(st->st_low);
-#if !(defined(VAR_ARRAYS) || defined (USE_ALLOCA))
+#if !(defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA))
    /*speex_free_scratch(st->stack);*/
 #endif
 
@@ -976,7 +976,7 @@ void *sb_decoder_init(const SpeexMode *m)
    st->encode_submode = 1;
 
    st->st_low = speex_decoder_init(mode->nb_mode);
-#if defined(VAR_ARRAYS) || defined (USE_ALLOCA)
+#if defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA)
    st->stack = NULL;
 #else
    /*st->stack = (char*)speex_alloc_scratch(SB_DEC_STACK);*/
@@ -1027,7 +1027,7 @@ void sb_decoder_destroy(void *state)
    SBDecState *st;
    st = (SBDecState*)state;
    speex_decoder_destroy(st->st_low);
-#if !(defined(VAR_ARRAYS) || defined (USE_ALLOCA))
+#if !(defined(HAVE_C_VARARRAYS) || defined (HAVE_ALLOCA))
    /*speex_free_scratch(st->stack);*/
 #endif
 

@@ -372,7 +372,7 @@ void spx_fft_float(void *table, float *in, float *out)
    int N = ((struct kiss_config *)table)->N;
 #else
 #endif
-#ifdef VAR_ARRAYS
+#ifdef HAVE_C_VARARRAYS
    spx_word16_t _in[N];
    spx_word16_t _out[N];
 #else
@@ -408,7 +408,7 @@ void spx_ifft_float(void *table, float *in, float *out)
    int N = ((struct kiss_config *)table)->N;
 #else
 #endif
-#ifdef VAR_ARRAYS
+#ifdef HAVE_C_VARARRAYS
    spx_word16_t _in[N];
    spx_word16_t _out[N];
 #else

@@ -35,14 +35,23 @@
 #ifndef STACK_ALLOC_H
 #define STACK_ALLOC_H
 
-#ifdef USE_ALLOCA
-# ifdef WIN32
-#  include <malloc.h>
+/* AIX requires this to be the first thing in the file.  */
+
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
 # else
-#  ifdef HAVE_ALLOCA_H
-#   include <alloca.h>
+#  ifdef _AIX
+ #pragma alloca
 #  else
-#   include <stdlib.h>
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+char *alloca ();
+#   else
+#    ifdef _WIN32
+#     include <malloc.h>
+#     define alloca _alloca
+#    endif
+#   endif
 #  endif
 # endif
 #endif
@@ -100,10 +109,10 @@
 
 #endif
 
-#if defined(VAR_ARRAYS)
+#if defined(HAVE_C_VARARRAYS)
 #define VARDECL(var) 
 #define ALLOC(var, size, type) type var[size]
-#elif defined(USE_ALLOCA)
+#elif defined(HAVE_ALLOCA)
 #define VARDECL(var) var
 #define ALLOC(var, size, type) var = alloca(sizeof(type)*(size))
 #else
